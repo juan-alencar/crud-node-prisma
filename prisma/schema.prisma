@@ -1,0 +1,94 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                    String       @id @default(uuid())
+  firstName             String
+  lastName              String
+  email                 String       @unique
+  username              String       @unique
+  password              String
+  actualRole            String
+  actualRoleDescription String
+  birthday              DateTime
+  phone                 String
+  about                 String
+  linkedin              String
+  github                String
+  photoUrl              String?
+  created_at            DateTime     @default(now())
+  updated_at            DateTime     @updatedAt
+  projects              Project[]
+  competences           Competence[]
+  experiences           Experience[]
+  feedbacks             Feedback[]
+  isActive              Boolean
+
+  @@map("users")
+}
+
+model Project {
+  id             String   @id @default(uuid())
+  title          String
+  description    String
+  repository     String
+  production_url String
+  image_url      String
+  created_at     DateTime @default(now())
+  updated_at     DateTime @updatedAt
+  user           User     @relation(fields: [user_id], references: [id])
+  user_id        String
+
+  @@map("projects")
+}
+
+model Competence {
+  id             String   @id @default(uuid())
+  name           String
+  level          String
+  recomendations Int
+  created_at     DateTime @default(now())
+  updated_at     DateTime @updatedAt
+  user           User     @relation(fields: [user_id], references: [id])
+  user_id        String
+
+  @@map("competences")
+}
+
+model Experience {
+  id           String   @id @default(uuid())
+  role         String
+  description  String
+  company      String
+  actual_role  Boolean
+  initial_date DateTime
+  final_date   DateTime
+  created_at   DateTime @default(now())
+  updated_at   DateTime @updatedAt
+  user         User     @relation(fields: [user_id], references: [id])
+  user_id      String
+
+  @@map("experiences")
+}
+
+model Feedback {
+  id         String   @id @default(uuid())
+  name       String
+  role       String
+  comment    String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  user       User?    @relation(fields: [user_id], references: [id])
+  user_id    String?
+
+  @@map("feedbacks")
+}
