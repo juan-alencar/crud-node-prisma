@@ -25,8 +25,8 @@ model User {
   linkedin              String
   github                String
   photoUrl              String?
-  created_at            DateTime     @default(now())
-  updated_at            DateTime     @updatedAt
+  createdAt             DateTime     @default(now())
+  updatedAt             DateTime     @updatedAt
   projects              Project[]
   competences           Competence[]
   experiences           Experience[]
@@ -37,16 +37,16 @@ model User {
 }
 
 model Project {
-  id             String   @id @default(uuid())
-  title          String
-  description    String
-  repository     String
-  production_url String
-  image_url      String
-  created_at     DateTime @default(now())
-  updated_at     DateTime @updatedAt
-  user           User     @relation(fields: [user_id], references: [id])
-  user_id        String
+  id            String   @id @default(uuid())
+  title         String
+  description   String
+  repository    String
+  productionUrl String
+  imageUrl      String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  user          User     @relation(fields: [userId], references: [id])
+  userId        String
 
   @@map("projects")
 }
@@ -56,10 +56,10 @@ model Competence {
   name           String
   level          String
   recomendations Int
-  created_at     DateTime @default(now())
-  updated_at     DateTime @updatedAt
-  user           User     @relation(fields: [user_id], references: [id])
-  user_id        String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  user           User     @relation(fields: [userId], references: [id])
+  userId         String
 
   @@map("competences")
 }
@@ -72,23 +72,23 @@ model Experience {
   actual_role  Boolean
   initial_date DateTime
   final_date   DateTime
-  created_at   DateTime @default(now())
-  updated_at   DateTime @updatedAt
-  user         User     @relation(fields: [user_id], references: [id])
-  user_id      String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  user         User     @relation(fields: [userId], references: [id])
+  userId       String
 
   @@map("experiences")
 }
 
 model Feedback {
-  id         String   @id @default(uuid())
-  name       String
-  role       String
-  comment    String
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
-  user       User?    @relation(fields: [user_id], references: [id])
-  user_id    String?
+  id        String   @id @default(uuid())
+  name      String
+  role      String
+  comment   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User?    @relation(fields: [userId], references: [id])
+  userId    String?
 
   @@map("feedbacks")
 }
