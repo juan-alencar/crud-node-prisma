@@ -51,12 +51,13 @@ export const createUserService = async ({
       },
     })
     .catch((err) => {
-      if (err instanceof PrismaClientKnownRequestError) {
-        if (err.code === "P2002") {
-          throw new AppError(
-            `Já existe um cadastro com esse ${err.meta!.target}`
-          );
-        }
+      console.log(err.code);
+      if (err.code === "P2002") {
+        throw new AppError(
+          `Já existe um cadastro com esse ${err.meta!.target}`
+        );
+      } else {
+        throw new AppError("Internal Server Error", 500);
       }
     });
 
