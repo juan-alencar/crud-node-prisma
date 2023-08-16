@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "postinstall": "prisma generate",
     "dev": "ts-node-dev --exit-child --transpile-only --ignore-watch node_modules src/index.ts",
     "vercel-build": "echo hello",
     "start": "nodemon src/index.ts",
