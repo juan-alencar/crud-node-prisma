@@ -1,10 +1,18 @@
 import express, { urlencoded } from "express";
+import cors from "cors";
+
 import { routerApp } from "./routes/index.routes";
 
 const app = express();
-const port = 3333;
+
+app.use(cors());
 app.use(express.json());
+app.get<{}, any>("/", (req, res) => {
+  res.json({
+    message: "🦄🌈✨👋🌎🌍🌏✨🌈🦄",
+  });
+});
+
 app.use(urlencoded({ extended: true }));
 app.use("", routerApp);
-app.listen(port, () => console.log(`Server is running in port ${port}`));
 export default app;
