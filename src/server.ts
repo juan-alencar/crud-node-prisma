@@ -7,3 +7,4 @@ app.use(express.json());
 app.use(urlencoded({ extended: true }));
 app.use("", routerApp);
 app.listen(port, () => console.log(`Server is running in port ${port}`));
+export default app;
