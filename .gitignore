@@ -5,7 +5,6 @@
 
 # Node artifact files
 node_modules/
-dist/
 yarn.lock
 yarn-error.log
 .yarnrc.yml
@@ -25,10 +24,6 @@ package-lock.json
 
 # Package files
 *.jar
-
-# Maven
-target/
-dist/
 
 # JetBrains IDE
 .idea/
